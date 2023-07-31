@@ -11,10 +11,7 @@ fake = Faker()
 def create_activities():
     activities = []
     for _ in range(10):
-        a = Activity(
-            name=fake.sentence(),
-            difficulty=randint(1, 5)
-        )
+        a = Activity(name=fake.sentence(), difficulty=randint(1, 5))
         activities.append(a)
 
     return activities
@@ -23,10 +20,7 @@ def create_activities():
 def create_campers():
     campers = []
     for _ in range(5):
-        c = Camper(
-            name=fake.name(),
-            age=rc(range(8, 19))
-        )
+        c = Camper(name=fake.name(), age=rc(range(8, 19)))
         campers.append(c)
 
     return campers
@@ -38,15 +32,14 @@ def create_signups(activities, campers):
         s = Signup(
             time=rc(range(24)),
             camper_id=rc([camper.id for camper in campers]),
-            activity_id=rc([activity.id for activity in activities])
+            activity_id=rc([activity.id for activity in activities]),
         )
         signups.append(s)
 
     return signups
 
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     with app.app_context():
         print("Clearing db...")
         Activity.query.delete()
